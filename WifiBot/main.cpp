@@ -10,5 +10,7 @@ int main(int argc, char *argv[])
     w.show();
     MyRobot robot;
     robot.doConnect();
+
+
     return a.exec();
 }

@@ -2,6 +2,10 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QCamera>
+#include <QCameraImageCapture>
+#include <QCameraViewfinder>
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -17,5 +21,8 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    QCamera *camera;
+    QCameraViewfinder *cameraView;
+    QCameraImageCapture *cameraImageCapture;
 };
 #endif // MAINWINDOW_H
