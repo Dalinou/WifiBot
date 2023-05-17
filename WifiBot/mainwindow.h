@@ -1,6 +1,6 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-
+#include "myrobot.h"
 #include <QMainWindow>
 
 QT_BEGIN_NAMESPACE
@@ -17,5 +17,6 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    MyRobot robot;
 };
 #endif // MAINWINDOW_H

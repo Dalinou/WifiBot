@@ -25,7 +25,10 @@ public slots:
     void bytesWritten(qint64 bytes);
     void readyRead();
     void MyTimerSlot();
-
+    void TestConnection();
+    short Crc16(unsigned char *Adresse_tab , unsigned char Taille_max);
+    void WriteData(unsigned char *Adresse_tab);
+    void Move(unsigned short leftSpeed, unsigned short rightSpeed,bool leftForward, bool rightForward);
 private:
     QTcpSocket *socket;
     QTimer *TimerEnvoi;
