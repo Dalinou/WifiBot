@@ -13,10 +13,8 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-<<<<<<< Updated upstream
   <widget class="QWidget" name="centralwidget"/>
   <widget class="QMenuBar" name="menubar"/>
-=======
   <widget class="QWidget" name="centralwidget">
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
