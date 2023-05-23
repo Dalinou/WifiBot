@@ -15,6 +15,12 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+public slots:
+    void onButtonUpClicked();
+    void onButtonDownClicked();
+    void onButtonRightClicked();
+    void onButtonLeftClicked();
+
 private:
     Ui::MainWindow *ui;
     MyRobot robot;

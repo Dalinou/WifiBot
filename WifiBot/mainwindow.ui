@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="pushButtonUp">
     <property name="geometry">
      <rect>
       <x>530</x>
@@ -27,7 +27,7 @@
      <string>Up</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="pushButton_Left">
     <property name="geometry">
      <rect>
       <x>460</x>
@@ -40,7 +40,7 @@
      <string>Left</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_3">
+   <widget class="QPushButton" name="pushButton_Right">
     <property name="geometry">
      <rect>
       <x>600</x>
@@ -53,7 +53,7 @@
      <string>Right</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_4">
+   <widget class="QPushButton" name="pushButton_Down">
     <property name="geometry">
      <rect>
       <x>530</x>
@@ -66,7 +66,7 @@
      <string>Down</string>
     </property>
    </widget>
-   <widget class="QLCDNumber" name="lcdNumber">
+   <widget class="QLCDNumber" name="lcdNumberCRC">
     <property name="geometry">
      <rect>
       <x>670</x>
@@ -76,7 +76,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QProgressBar" name="progressBar">
+   <widget class="QProgressBar" name="progressBarBatterie">
     <property name="geometry">
      <rect>
       <x>640</x>
@@ -89,7 +89,7 @@
      <number>24</number>
     </property>
    </widget>
-   <widget class="QLCDNumber" name="lcdNumber_2">
+   <widget class="QLCDNumber" name="lcdNumber_2_Odomtrie1">
     <property name="geometry">
      <rect>
       <x>630</x>
@@ -99,7 +99,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QLCDNumber" name="lcdNumber_3">
+   <widget class="QLCDNumber" name="lcdNumber_3_Odometrie2">
     <property name="geometry">
      <rect>
       <x>710</x>
@@ -109,7 +109,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QTextBrowser" name="textBrowser">
+   <widget class="QTextBrowser" name="CRC">
     <property name="geometry">
      <rect>
       <x>520</x>
@@ -129,7 +129,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;CRC :&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
-   <widget class="QTextBrowser" name="textBrowser_2">
+   <widget class="QTextBrowser" name="Batterie">
     <property name="geometry">
      <rect>
       <x>520</x>
@@ -149,7 +149,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Batterie :&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
-   <widget class="QTextBrowser" name="textBrowser_3">
+   <widget class="QTextBrowser" name="Odometrie">
     <property name="geometry">
      <rect>
       <x>520</x>
@@ -189,7 +189,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;WEBCAM&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
-   <widget class="QOpenGLWidget" name="openGLWidget">
+   <widget class="QOpenGLWidget" name="openGLWidgetWebcam">
     <property name="geometry">
      <rect>
       <x>40</x>
@@ -199,7 +199,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
      </rect>
     </property>
    </widget>
-   <widget class="QSlider" name="verticalSlider">
+   <widget class="QSlider" name="verticalSliderVitesseGauche">
     <property name="geometry">
      <rect>
       <x>420</x>
@@ -212,7 +212,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
      <enum>Qt::Vertical</enum>
     </property>
    </widget>
-   <widget class="QSlider" name="verticalSlider_2">
+   <widget class="QSlider" name="verticalSlider_VitesseDroite">
     <property name="geometry">
      <rect>
       <x>710</x>
