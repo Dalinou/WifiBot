@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 #include "myrobot.h"
 #include <QMainWindow>
+#include <QWebEngineView>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }

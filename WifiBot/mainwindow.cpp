@@ -8,11 +8,17 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     robot.doConnect();
-    robot.Move(120, 120, false, true);
+    //robot.Move(120, 120, false, true);
+    //Pour gérer les boutons
     connect(ui->pushButtonUp, &QPushButton::clicked, this, &MainWindow::onButtonUpClicked); //bouton UP
     connect(ui->pushButton_Down, &QPushButton::clicked, this, &MainWindow::onButtonDownClicked); //bouton DOWN
     connect(ui->pushButton_Right, &QPushButton::clicked, this, &MainWindow::onButtonRightClicked); //bouton RIGHT
     connect(ui->pushButton_Left, &QPushButton::clicked, this, &MainWindow::onButtonLeftClicked); //bouton LEFT
+    //Pour gérer la
+    QWebEngineView *webView = new QWebEngineView(ui->videoWidget);
+    webView->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);// Créer une politique de taille pour l'expansion horizontale et verticale
+    webView->setMinimumSize(341,311); //taille minimum de l'affichage de la Webcam
+    webView->load(QUrl("http://192.168.1.106:8080/?action=stream"));
 }
 
 MainWindow::~MainWindow()
