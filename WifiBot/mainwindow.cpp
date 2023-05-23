@@ -14,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->pushButton_Down, &QPushButton::clicked, this, &MainWindow::onButtonDownClicked); //bouton DOWN
     connect(ui->pushButton_Right, &QPushButton::clicked, this, &MainWindow::onButtonRightClicked); //bouton RIGHT
     connect(ui->pushButton_Left, &QPushButton::clicked, this, &MainWindow::onButtonLeftClicked); //bouton LEFT
+    connect(ui->pushButton_STOP, &QPushButton::clicked, this, &MainWindow::onButtonSTOPClicked); //bouton STOP
     //Pour gérer la
     QWebEngineView *webView = new QWebEngineView(ui->videoWidget);
     webView->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);// Créer une politique de taille pour l'expansion horizontale et verticale
@@ -49,5 +50,11 @@ void MainWindow::onButtonLeftClicked()
 {
     // Code à exécuter lorsque le bouton Left est cliqué
     robot.Move(120, 120, false, true);
+}
+
+void MainWindow::onButtonSTOPClicked()
+{
+    // Code à exécuter lorsque le bouton STOP est cliqué
+    robot.Move(1, 1, true, true);
 }
 

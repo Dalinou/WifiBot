@@ -21,6 +21,7 @@ public slots:
     void onButtonDownClicked();
     void onButtonRightClicked();
     void onButtonLeftClicked();
+    void onButtonSTOPClicked();
 
 private:
     Ui::MainWindow *ui;
