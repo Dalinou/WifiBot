@@ -61,6 +61,27 @@ void MyRobot::readyRead() {
     DataReceived = socket->readAll();
     emit updateUI(DataReceived);
     qDebug() << DataReceived;
+    //Left
+    int SpeedFront=(int)((DataReceived[1] << 8) + DataReceived[0]);
+    if (SpeedFront > 32767) SpeedFront-=65536;
+    int BatLevel=DataReceived[2];
+    int IR=DataReceived[3];
+    int IR2=DataReceived[4];
+    int odometry=((((long)DataReceived[8] << 24))+(((long)DataReceived[7] << 16))+(((long)DataReceived[6] << 8))+((long)DataReceived[5]));
+    qDebug() << "Left speed:" << SpeedFront << "\tIR:" << IR << "\tIR2:" << IR2 << "\todométrie:" << odometry;
+    //Right
+    SpeedFront=(int)(DataReceived[10] << 8) + DataReceived[9];
+    if (SpeedFront > 32767) SpeedFront=SpeedFront-65536;
+    IR=DataReceived[11];
+    IR2=DataReceived[12];
+    odometry=((((long)DataReceived[16] << 24))+(((long)DataReceived[15] << 16))+(((long)DataReceived[14] << 8))+((long)DataReceived[13]));
+    qDebug() << "Right speed:" << SpeedFront << "\tIR:" << IR << "\tIR2:" << IR2 << "\todométrie:" << odometry;
+    int Current=DataReceived[17];
+    int Version=DataReceived[18];
+    qDebug() << "bat : " << BatLevel << "\tCurrent:" << Current << "\tVersion:" << Version;
+
+
+
 }
 
 void MyRobot::MyTimerSlot() {
