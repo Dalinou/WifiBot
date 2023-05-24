@@ -3,6 +3,8 @@
 #include "myrobot.h"
 #include <QMainWindow>
 #include <QWebEngineView>
+#include <QWidget>
+#include <QKeyEvent>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -22,6 +24,7 @@ public slots:
     void onButtonRightClicked();
     void onButtonLeftClicked();
     void onButtonSTOPClicked();
+    void keyPressEvent(QKeyEvent* event);
 
 private:
     Ui::MainWindow *ui;
