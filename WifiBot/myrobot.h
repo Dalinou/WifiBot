@@ -16,6 +16,7 @@ public:
     QByteArray DataToSend;
     QByteArray DataReceived;
     QMutex Mutex;
+    int captorValues[11];
 
 signals:
     void updateUI(const QByteArray Data);

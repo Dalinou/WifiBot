@@ -62,23 +62,29 @@ void MyRobot::readyRead() {
     emit updateUI(DataReceived);
     qDebug() << DataReceived;
     //Left
-    int SpeedFront=(int)((DataReceived[1] << 8) + DataReceived[0]);
-    if (SpeedFront > 32767) SpeedFront-=65536;
-    int BatLevel=DataReceived[2];
-    int IR=DataReceived[3];
-    int IR2=DataReceived[4];
-    int odometry=((((long)DataReceived[8] << 24))+(((long)DataReceived[7] << 16))+(((long)DataReceived[6] << 8))+((long)DataReceived[5]));
-    qDebug() << "Left speed:" << SpeedFront << "\tIR:" << IR << "\tIR2:" << IR2 << "\todométrie:" << odometry;
+    captorValues[0]=(int)((DataReceived[1] << 8) + DataReceived[0]); //SpeedFront left
+    if (captorValues[0] > 32767) captorValues[0]-=65536;
+
+    captorValues[1]=DataReceived[3]; //IR1 left
+    captorValues[2]=DataReceived[4]; //IR2 left
+    //Odométrie left
+    captorValues[3]=((((long)DataReceived[8] << 24))+(((long)DataReceived[7] << 16))+(((long)DataReceived[6] << 8))+((long)DataReceived[5]));
+    qDebug() << "Left speed:" << captorValues[0] << "\tIR:" << captorValues[1] << "\tIR2:" << captorValues[2] << "\todométrie:" << captorValues[3];
     //Right
-    SpeedFront=(int)(DataReceived[10] << 8) + DataReceived[9];
-    if (SpeedFront > 32767) SpeedFront=SpeedFront-65536;
-    IR=DataReceived[11];
-    IR2=DataReceived[12];
-    odometry=((((long)DataReceived[16] << 24))+(((long)DataReceived[15] << 16))+(((long)DataReceived[14] << 8))+((long)DataReceived[13]));
-    qDebug() << "Right speed:" << SpeedFront << "\tIR:" << IR << "\tIR2:" << IR2 << "\todométrie:" << odometry;
-    int Current=DataReceived[17];
-    int Version=DataReceived[18];
-    qDebug() << "bat : " << BatLevel << "\tCurrent:" << Current << "\tVersion:" << Version;
+    captorValues[4]=(int)(DataReceived[10] << 8) + DataReceived[9]; //SpeedFront right
+    if (captorValues[4] > 32767) captorValues[4]-=65536;
+    captorValues[5]=DataReceived[11];//IR1 right
+    captorValues[6]=DataReceived[12];//IR2 right
+    //odométrie right
+    captorValues[7]=((((long)DataReceived[16] << 24))+(((long)DataReceived[15] << 16))+(((long)DataReceived[14] << 8))+((long)DataReceived[13]));
+    qDebug() << "Right speed:" << captorValues[4] << "\tIR:" << captorValues[5] << "\tIR2:" << captorValues[6] << "\todométrie:" << captorValues[7];
+        captorValues[8]=DataReceived[2]; // Bat Level
+    captorValues[9]=DataReceived[17]; // Current
+        captorValues[10]=DataReceived[18]; // Version
+
+    qDebug() << "bat : " << captorValues[8] << "\tCurrent:" << captorValues[9] << "\tVersion:" << captorValues[10];
+
+
 
 
 
