@@ -7,31 +7,35 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    robot.doConnect();
+    //robot.doConnect();
     setFocusPolicy(Qt::StrongFocus); // Permettre à la fenêtre de recevoir le focus clavier
     setFocus(); // Définir le focus clavier sur la fenêtre principale
 
     //robot.Move(120, 120, false, true);
-    //Gérer l'affichage des infos transmises par les capteurs du robot
-    ui->lcdNumber_Odometrie1->display(robot.captorValues[3]); //Affichage odométrie gauche
-    ui->lcdNumber_Odometrie2->display(robot.captorValues[7]); //Affichage odométrie droite
-    ui->lcdNumber_vitesse_gauche->display(robot.captorValues[0]); //Affichage vitesse gauche
-    ui->lcdNumber_vitesse_droite->display(robot.captorValues[4]); //Affichage vitesse droite
-    ui->progressBarBatterie->setValue(robot.captorValues[8]); //Affichage batterie
     //Pour gérer les boutons directionnels
     connect(ui->pushButtonUp, &QPushButton::clicked, this, &MainWindow::onButtonUpClicked); //bouton UP
     connect(ui->pushButton_Down, &QPushButton::clicked, this, &MainWindow::onButtonDownClicked); //bouton DOWN
     connect(ui->pushButton_Right, &QPushButton::clicked, this, &MainWindow::onButtonRightClicked); //bouton RIGHT
     connect(ui->pushButton_Left, &QPushButton::clicked, this, &MainWindow::onButtonLeftClicked); //bouton LEFT
     connect(ui->pushButton_STOP, &QPushButton::clicked, this, &MainWindow::onButtonSTOPClicked); //bouton STOP
+    //Gestion boutons connexion et deconnexion
+    connect(ui->Connexion, &QPushButton::clicked, this, &MainWindow::connexion);
+    connect(ui->Deconnexion, &QPushButton::clicked, this, &MainWindow::deconnexion);
+
 
     //Pour afficher la Webcam
     displayWebcam();
+    //Timer for actualising the captor display captor values
+    TimerCaptor = new QTimer();
+    // setup signal and slot
+    connect(TimerCaptor, SIGNAL(timeout()), this, SLOT(updateCaptorValues())); //Update display
+
+    TimerCaptor->start(250);
 }
 
 MainWindow::~MainWindow()
 {
-    robot.disConnect();
+    TimerCaptor->stop();
     delete ui;
 }
 
@@ -106,11 +110,25 @@ void MainWindow::keyPressEvent(QKeyEvent* event)
 
 void MainWindow::displayWebcam() //Pour gérer l'affichage de la webcam sur l'interface
 {
-    return;
     QWebEngineView *webView = new QWebEngineView(ui->videoWidget); //Création de l'objet lié au widget videoWidget sur l'interface
     webView->setMinimumSize(341,311); //taille minimum de l'affichage de la Webcam
     webView->load(QUrl("http://192.168.1.106:8080/?action=stream")); // lien du stream de la webcam
 }
 
+void MainWindow::updateCaptorValues(){
+    ui->lcdNumber_Odometrie1->display(robot.captorValues[3]); //Affichage odométrie gauche
+    ui->lcdNumber_Odometrie2->display(robot.captorValues[7]); //Affichage odométrie droite
+    ui->lcdNumber_vitesse_gauche->display(robot.captorValues[0]); //Affichage vitesse gauche
+    ui->lcdNumber_vitesse_droite->display(robot.captorValues[4]); //Affichage vitesse droite
+    ui->progressBarBatterie->setValue(abs(robot.captorValues[8])); //Affichage batterie
+    ui->lcdNumberIR_LEFT->display(robot.captorValues[1]); //Affichage IR1 Left
+    ui->lcdNumberIR_RIGHT->display(robot.captorValues[5]); //Affichage IR1 Right
+}
 
+void MainWindow::connexion(){
+    robot.doConnect();
+}
 
+void MainWindow::deconnexion(){
+    robot.disConnect();
+}

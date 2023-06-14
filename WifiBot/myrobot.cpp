@@ -59,7 +59,7 @@ void MyRobot::readyRead() {
     qDebug() << "reading..."; // read the data from the socket
     DataReceived = socket->readAll();
     emit updateUI(DataReceived);
-    qDebug() << DataReceived;
+    //qDebug() << DataReceived;
     //Left
     captorValues[0]=(int)((DataReceived[1] << 8) + DataReceived[0]); //SpeedFront left
     if (captorValues[0] > 32767) captorValues[0]-=65536;
@@ -68,7 +68,7 @@ void MyRobot::readyRead() {
     captorValues[2]=DataReceived[4]; //IR2 left
     //Odométrie left
     captorValues[3]=((((long)DataReceived[8] << 24))+(((long)DataReceived[7] << 16))+(((long)DataReceived[6] << 8))+((long)DataReceived[5]));
-    qDebug() << "Left speed:" << captorValues[0] << "\tIR:" << captorValues[1] << "\tIR2:" << captorValues[2] << "\todométrie:" << captorValues[3];
+    //qDebug() << "Left speed:" << captorValues[0] << "\tIR:" << captorValues[1] << "\tIR2:" << captorValues[2] << "\todométrie:" << captorValues[3];
     //Right
     captorValues[4]=(int)(DataReceived[10] << 8) + DataReceived[9]; //SpeedFront right
     if (captorValues[4] > 32767) captorValues[4]-=65536;
@@ -76,12 +76,12 @@ void MyRobot::readyRead() {
     captorValues[6]=DataReceived[12];//IR2 right
     //odométrie right
     captorValues[7]=((((long)DataReceived[16] << 24))+(((long)DataReceived[15] << 16))+(((long)DataReceived[14] << 8))+((long)DataReceived[13]));
-    qDebug() << "Right speed:" << captorValues[4] << "\tIR:" << captorValues[5] << "\tIR2:" << captorValues[6] << "\todométrie:" << captorValues[7];
-    captorValues[8]=DataReceived[2]; // Bat Level
+    //qDebug() << "Right speed:" << captorValues[4] << "\tIR:" << captorValues[5] << "\tIR2:" << captorValues[6] << "\todométrie:" << captorValues[7];
+    captorValues[8]=DataReceived[2] << 2; // Bat Level
     captorValues[9]=DataReceived[17]; // Current
     captorValues[10]=DataReceived[18]; // Version
 
-    qDebug() << "bat : " << captorValues[8] << "\tCurrent:" << captorValues[9] << "\tVersion:" << captorValues[10];
+    //qDebug() << "bat : " << captorValues[8] << "\tCurrent:" << captorValues[9] << "\tVersion:" << captorValues[10];
 
 
 

@@ -26,9 +26,13 @@ public slots:
     void onButtonLeftClicked();
     void onButtonSTOPClicked();
     void keyPressEvent(QKeyEvent* event);
+    void updateCaptorValues();
+    void connexion();
+    void deconnexion();
 
 private:
     Ui::MainWindow *ui;
     MyRobot robot;
+    QTimer *TimerCaptor;
 };
 #endif // MAINWINDOW_H
