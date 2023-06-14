@@ -56,7 +56,6 @@ void MyRobot::bytesWritten(qint64 bytes) {
 }
 
 void MyRobot::readyRead() {
-    QThread::sleep(1);
     qDebug() << "reading..."; // read the data from the socket
     DataReceived = socket->readAll();
     emit updateUI(DataReceived);
@@ -78,9 +77,9 @@ void MyRobot::readyRead() {
     //odométrie right
     captorValues[7]=((((long)DataReceived[16] << 24))+(((long)DataReceived[15] << 16))+(((long)DataReceived[14] << 8))+((long)DataReceived[13]));
     qDebug() << "Right speed:" << captorValues[4] << "\tIR:" << captorValues[5] << "\tIR2:" << captorValues[6] << "\todométrie:" << captorValues[7];
-        captorValues[8]=DataReceived[2]; // Bat Level
+    captorValues[8]=DataReceived[2]; // Bat Level
     captorValues[9]=DataReceived[17]; // Current
-        captorValues[10]=DataReceived[18]; // Version
+    captorValues[10]=DataReceived[18]; // Version
 
     qDebug() << "bat : " << captorValues[8] << "\tCurrent:" << captorValues[9] << "\tVersion:" << captorValues[10];
 
@@ -107,57 +106,51 @@ void MyRobot::TestConnection(){
     DataReceived = socket->readAll();
     qDebug() << DataReceived;
 }
-short MyRobot::Crc16(unsigned char *Adresse_tab , unsigned char Taille_max)
-{
+
+unsigned short MyRobot::Crc16(unsigned char *Adresse_tab, unsigned char Taille_max){
     unsigned int Crc = 0xFFFF;
     unsigned int Polynome = 0xA001;
     unsigned int CptOctet = 0;
     unsigned int CptBit = 0;
-    unsigned int Parity= 0;
+    unsigned int Parity = 0;
+
     Crc = 0xFFFF;
     Polynome = 0xA001;
-    for ( CptOctet= 1 ; CptOctet < Taille_max ; CptOctet++)
+
+    for(CptOctet = 1 ; CptOctet < Taille_max ; CptOctet ++)
     {
-        Crc ^= *( Adresse_tab + CptOctet);
-        for ( CptBit = 0; CptBit <= 7 ; CptBit++)
+        Crc ^= *(Adresse_tab + CptOctet);
+        for(CptBit =  0; CptBit <= 7 ; CptBit ++)
         {
-            Parity= Crc;
-            Crc >>= 1;
-            if (Parity%2 == true) Crc ^= Polynome;
+            Parity = Crc;
+            Crc >>=1;
+            if(Parity%2 == true) Crc ^= Polynome;
         }
     }
-    return(Crc);
-}
-
-void MyRobot::WriteData(unsigned char *Adresse_tab){
-    for (int i=0;i<9;i++){
-        DataToSend[i] = Adresse_tab[i];
-    }
+    return Crc;
 }
 void MyRobot::Move(unsigned short leftSpeed, unsigned short rightSpeed, bool leftForward, bool rightForward){
-    unsigned char sbuf[9];
-    sbuf[0]=0xFF;
-    sbuf[1]=0x07;
-    sbuf[6]=0;
+    DataToSend[0]=0xFF;
+    DataToSend[1]=0x07;
+    DataToSend[2]=(char)leftSpeed;
+    DataToSend[3]=(char)(leftSpeed>>8);
+    DataToSend[4]=(char)rightSpeed;
+    DataToSend[5]=(char)(rightSpeed>>8);
+    short dir = 0;
+
     if (leftSpeed!=0){
-        sbuf[2]=(char)leftSpeed;
-        sbuf[3]=(char)(leftSpeed>>8);
         if (leftForward){
-            sbuf[6] += 64;
+            dir += 64;
         }
     }
     if (rightSpeed!=0){
-        sbuf[4]=(char)rightSpeed;
-        sbuf[5]=(char)(rightSpeed>>8);
         if (rightForward){
-            sbuf[6] += 16;
+            dir += 16;
         }
     }
-
-    unsigned short crc = Crc16(sbuf,7);
-    qDebug() << crc;
-    sbuf[7]=(char)crc;
-    sbuf[8]=(char)(crc>>8);
-
-    WriteData(sbuf);
+    DataToSend[6] = (char)dir;
+    unsigned short crc = Crc16((unsigned char*)(DataToSend.constData()), 7);
+    DataToSend[7] = (unsigned char)crc;
+    DataToSend[8] = (unsigned char)(crc >> 8);
 }
+

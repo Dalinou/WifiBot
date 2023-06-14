@@ -17,6 +17,7 @@ public:
     QByteArray DataReceived;
     QMutex Mutex;
     int captorValues[11];
+    unsigned short Crc16(unsigned char *Adresse_tab, unsigned char Taille_max);
 
 signals:
     void updateUI(const QByteArray Data);
@@ -27,9 +28,8 @@ public slots:
     void readyRead();
     void MyTimerSlot();
     void TestConnection();
-    short Crc16(unsigned char *Adresse_tab , unsigned char Taille_max);
-    void WriteData(unsigned char *Adresse_tab);
     void Move(unsigned short leftSpeed, unsigned short rightSpeed,bool leftForward, bool rightForward);
+
 private:
     QTcpSocket *socket;
     QTimer *TimerEnvoi;

@@ -111,3 +111,6 @@ void MainWindow::displayWebcam() //Pour gérer l'affichage de la webcam sur l'in
     webView->setMinimumSize(341,311); //taille minimum de l'affichage de la Webcam
     webView->load(QUrl("http://192.168.1.106:8080/?action=stream")); // lien du stream de la webcam
 }
+
+
+
