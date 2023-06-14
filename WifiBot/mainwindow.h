@@ -24,11 +24,15 @@ public slots:
     void onButtonDownClicked();
     void onButtonRightClicked();
     void onButtonLeftClicked();
-    void onButtonSTOPClicked();
+    void onButtonStopClicked();
     void keyPressEvent(QKeyEvent* event);
     void updateCaptorValues();
     void connexion();
     void deconnexion();
+    void onButtonUpWebcamClicked();
+    void onButtonDownWebcamClicked();
+    void onButtonRightWebcamClicked();
+    void onButtonLeftWebcamClicked();
 
 private:
     Ui::MainWindow *ui;
