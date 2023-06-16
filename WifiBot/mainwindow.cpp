@@ -110,7 +110,7 @@ void MainWindow::keyPressEvent(QKeyEvent* event)
         //lorsque la touche Q est pressée tourne à gauche
         onButtonLeftClicked();
     }
-    else if (key == Qt::Key_P)
+    else if (key == Qt::Key_Space)
     {
         //lorsque la touche Space est pressée stop
         onButtonStopClicked();
@@ -156,6 +156,8 @@ void MainWindow::updateCaptorValues(){
     ui->progressBarBatterie->setValue(abs(robot.captorValues[8])); //Affichage batterie
     ui->lcdNumberIR_LEFT->display(robot.captorValues[1]); //Affichage IR1 Left
     ui->lcdNumberIR_RIGHT->display(robot.captorValues[5]); //Affichage IR1 Right
+    ui->lcdNumberIR_LEFT_2->display(robot.captorValues[2]); //Affichage IR1 Left
+    ui->lcdNumberIR_RIGHT_2->display(robot.captorValues[6]); //Affichage IR1 Right
 }
 
 void MainWindow::connexion(){
