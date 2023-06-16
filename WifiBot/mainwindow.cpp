@@ -116,17 +116,17 @@ void MainWindow::keyPressEvent(QKeyEvent* event)
         onButtonStopClicked();
     }
     else if(key == Qt::Key_Up){
-        onButtonUpWebcamClicked();
+        onButtonUpWebcamClicked(); //monte la webcam quand Up pressé
     }
     else if(key == Qt::Key_Down){
-        onButtonDownWebcamClicked();
+        onButtonDownWebcamClicked(); //descend la webcam quand Down pressé
 
     }
     else if(key == Qt::Key_Left){
-        onButtonLeftWebcamClicked();
+        onButtonLeftWebcamClicked(); //tourne à gauche la webcam quand touche Left pressé
     }
     else if(key == Qt::Key_Right){
-        onButtonRightWebcamClicked();
+        onButtonRightWebcamClicked(); //tourne à droite la webcam quand touche Right pressé
     }
     else if(key == Qt::Key_A){
         ui->speedSlider_Left->setValue(ui->speedSlider_Left->value()+5); //Augmente la vitesse des roues gauches
@@ -156,18 +156,19 @@ void MainWindow::updateCaptorValues(){
     ui->progressBarBatterie->setValue(abs(robot.captorValues[8])); //Affichage batterie
     ui->lcdNumberIR_LEFT->display(robot.captorValues[1]); //Affichage IR1 Left
     ui->lcdNumberIR_RIGHT->display(robot.captorValues[5]); //Affichage IR1 Right
-    ui->lcdNumberIR_LEFT_2->display(robot.captorValues[2]); //Affichage IR1 Left
-    ui->lcdNumberIR_RIGHT_2->display(robot.captorValues[6]); //Affichage IR1 Right
+    ui->lcdNumberIR_LEFT_2->display(robot.captorValues[2]); //Affichage IR2 Left
+    ui->lcdNumberIR_RIGHT_2->display(robot.captorValues[6]); //Affichage IR2 Right
 }
 
 void MainWindow::connexion(){
-    robot.doConnect();
+    robot.doConnect(); //Connexion au robot
 }
 
 void MainWindow::deconnexion(){
-    robot.disConnect();
+    robot.disConnect(); //Déconnexion au robot
 }
 
+//Fonctions pour gérer les mouvements de la webcam
 void MainWindow::onButtonUpWebcamClicked(){
     manager->get(QNetworkRequest(QUrl("http://192.168.1.106:8080/?action=command&dest=0&plugin=0&id=10094853&group=1&value=-200")));
 }
