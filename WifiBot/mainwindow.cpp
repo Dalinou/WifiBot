@@ -20,7 +20,6 @@ MainWindow::MainWindow(QWidget *parent)
     ui->speedSlider_Left->setSingleStep(1);
     ui->speedSlider_Right->setSingleStep(1);
 
-    //robot.Move(120, 120, false, true);
     //Pour gérer les boutons directionnels
     connect(ui->pushButtonUp, &QPushButton::clicked, this, &MainWindow::onButtonUpClicked); //bouton UP
     connect(ui->pushButton_Down, &QPushButton::clicked, this, &MainWindow::onButtonDownClicked); //bouton DOWN
