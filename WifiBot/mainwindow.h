@@ -38,5 +38,6 @@ private:
     Ui::MainWindow *ui;
     MyRobot robot;
     QTimer *TimerCaptor;
+    QNetworkAccessManager *manager;
 };
 #endif // MAINWINDOW_H

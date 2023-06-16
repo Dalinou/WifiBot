@@ -4,12 +4,21 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
+    , manager(new QNetworkAccessManager(this))
 {
     ui->setupUi(this);
 
     //robot.doConnect();
     setFocusPolicy(Qt::StrongFocus); // Permettre à la fenêtre de recevoir le focus clavier
     setFocus(); // Définir le focus clavier sur la fenêtre principale
+
+    //Defini les valeurs des sliders de vitesse
+    ui->speedSlider_Left->setMinimum(1);
+    ui->speedSlider_Right->setMinimum(1);
+    ui->speedSlider_Left->setMaximum(240);
+    ui->speedSlider_Right->setMaximum(240);
+    ui->speedSlider_Left->setSingleStep(1);
+    ui->speedSlider_Right->setSingleStep(1);
 
     //robot.Move(120, 120, false, true);
     //Pour gérer les boutons directionnels
@@ -48,25 +57,25 @@ MainWindow::~MainWindow()
 void MainWindow::onButtonUpClicked()
 {
     // Code à exécuter lorsque le bouton Up est cliqué
-    robot.Move(120, 120, true, true);
+    robot.Move(ui->speedSlider_Left->value(), ui->speedSlider_Right->value(), true, true);
 }
 
 void MainWindow::onButtonDownClicked()
 {
     // Code à exécuter lorsque le bouton Down est cliqué
-    robot.Move(120, 120, false, false);
+    robot.Move(ui->speedSlider_Left->value(), ui->speedSlider_Right->value(), false, false);
 }
 
 void MainWindow::onButtonRightClicked()
 {
     // Code à exécuter lorsque le bouton Right est cliqué
-    robot.Move(120, 120, true, false);
+    robot.Move(ui->speedSlider_Left->value(), ui->speedSlider_Right->value(), true, false);
 }
 
 void MainWindow::onButtonLeftClicked()
 {
     // Code à exécuter lorsque le bouton Left est cliqué
-    robot.Move(120, 120, false, true);
+    robot.Move(ui->speedSlider_Left->value(), ui->speedSlider_Right->value(), false, true);
 }
 
 void MainWindow::onButtonStopClicked()
@@ -151,18 +160,14 @@ void MainWindow::deconnexion(){
 }
 
 void MainWindow::onButtonUpWebcamClicked(){
-    QNetworkAccessManager *manager = new QNetworkAccessManager(this);
     manager->get(QNetworkRequest(QUrl("http://192.168.1.106:8080/?action=command&dest=0&plugin=0&id=10094853&group=1&value=-200")));
 }
 void MainWindow::onButtonDownWebcamClicked(){
-    QNetworkAccessManager *manager = new QNetworkAccessManager(this);
     manager->get(QNetworkRequest(QUrl("http://192.168.1.106:8080/?action=command&dest=0&plugin=0&id=10094853&group=1&value=200")));
 }
 void MainWindow::onButtonRightWebcamClicked(){
-    QNetworkAccessManager *manager = new QNetworkAccessManager(this);
     manager->get(QNetworkRequest(QUrl("http://192.168.1.106:8080/?action=command&dest=0&plugin=0&id=10094852&group=1&value=-200")));
 }
 void MainWindow::onButtonLeftWebcamClicked(){
-    QNetworkAccessManager *manager = new QNetworkAccessManager(this);
     manager->get(QNetworkRequest(QUrl("http://192.168.1.106:8080/?action=command&dest=0&plugin=0&id=10094852&group=1&value=200")));
 }
