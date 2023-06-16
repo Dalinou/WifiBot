@@ -77,7 +77,7 @@ void MyRobot::readyRead() {
     //odométrie right
     captorValues[7]=((((long)DataReceived[16] << 24))+(((long)DataReceived[15] << 16))+(((long)DataReceived[14] << 8))+((long)DataReceived[13]));
     //qDebug() << "Right speed:" << captorValues[4] << "\tIR:" << captorValues[5] << "\tIR2:" << captorValues[6] << "\todométrie:" << captorValues[7];
-    captorValues[8]=DataReceived[2] << 2; // Bat Level
+    captorValues[8]=DataReceived[2]; // Bat Level
     captorValues[9]=DataReceived[17]; // Current
     captorValues[10]=DataReceived[18]; // Version
 

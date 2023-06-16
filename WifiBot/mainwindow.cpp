@@ -93,27 +93,27 @@ void MainWindow::keyPressEvent(QKeyEvent* event)
     // Effectuer des actions en fonction de la touche pressée
     if (key == Qt::Key_Z)
     {
-        //lorsque la touche Up est pressée
+        //lorsque la touche Z est pressée avance
         onButtonUpClicked();
     }
     else if (key == Qt::Key_S)
     {
-        //lorsque la touche Down est pressée
+        //lorsque la touche S est pressée recule
         onButtonDownClicked();
     }
     else if (key == Qt::Key_D)
     {
-        //lorsque la touche Right est pressée
+        //lorsque la touche R est pressée tourne à droite
         onButtonRightClicked();
     }
     else if (key == Qt::Key_Q)
     {
-        //lorsque la touche Left est pressée
+        //lorsque la touche Q est pressée tourne à gauche
         onButtonLeftClicked();
     }
     else if (key == Qt::Key_P)
     {
-        //lorsque la touche Space est pressée
+        //lorsque la touche Space est pressée stop
         onButtonStopClicked();
     }
     else if(key == Qt::Key_Up){
@@ -128,6 +128,14 @@ void MainWindow::keyPressEvent(QKeyEvent* event)
     }
     else if(key == Qt::Key_Right){
         onButtonRightWebcamClicked();
+    }
+    else if(key == Qt::Key_A){
+        ui->speedSlider_Left->setValue(ui->speedSlider_Left->value()+5); //Augmente la vitesse des roues gauches
+        ui->speedSlider_Right->setValue(ui->speedSlider_Right->value()+5); //Augmente la vitesse des roues droites
+    }
+    else if(key == Qt::Key_E){
+        ui->speedSlider_Left->setValue(ui->speedSlider_Left->value()-5); //Diminue la vitesse des roues gauches
+        ui->speedSlider_Right->setValue(ui->speedSlider_Right->value()-5); //Diminue la vitesse des roues droite
     }
 
     // Passer l'événement au gestionnaire parent
