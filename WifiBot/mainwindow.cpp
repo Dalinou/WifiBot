@@ -30,10 +30,10 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->Connexion, &QPushButton::clicked, this, &MainWindow::connexion); //Bouton connexion robot
     connect(ui->Deconnexion, &QPushButton::clicked, this, &MainWindow::deconnexion); //Bouton deconnexion robot
     //Gestion boutons mouvements webcam
-    connect(ui->pushButtonUp_Webcam, &QPushButton::clicked, this, &MainWindow::onButtonUpWebcamClicked); //bouton UP
-    connect(ui->pushButtonDown_Webcam, &QPushButton::clicked, this, &MainWindow::onButtonDownWebcamClicked); //bouton DOWN
-    connect(ui->pushButtonRight_Webcam, &QPushButton::clicked, this, &MainWindow::onButtonRightWebcamClicked); //bouton RIGHT
-    connect(ui->pushButtonLeft_Webcam, &QPushButton::clicked, this, &MainWindow::onButtonLeftWebcamClicked); //bouton LEFT
+    connect(ui->pushButtonUp_Webcam, &QPushButton::clicked, this, &MainWindow::onButtonUpWebcamClicked); //bouton UP webcam
+    connect(ui->pushButtonDown_Webcam, &QPushButton::clicked, this, &MainWindow::onButtonDownWebcamClicked); //bouton DOWN webcam
+    connect(ui->pushButtonRight_Webcam, &QPushButton::clicked, this, &MainWindow::onButtonRightWebcamClicked); //bouton RIGHT webcam
+    connect(ui->pushButtonLeft_Webcam, &QPushButton::clicked, this, &MainWindow::onButtonLeftWebcamClicked); //bouton LEFT webcam
 
     //Pour afficher la Webcam
     displayWebcam();
